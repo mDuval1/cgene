@@ -24,3 +24,8 @@ jobs:
         run: yarn lint
       - name: Build
         run: yarn build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CGENE_14789 }}"
+          projectId: cgene-14789
