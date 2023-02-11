@@ -1,8 +1,8 @@
 name: Frontend Deployment
 on:
   push:
-    paths:
-      - "services/frontend"
+    branches:
+      - main
 jobs:
   build:
     name: Build the frontend
