@@ -42,5 +42,5 @@
     "sort-keys-fix/sort-keys-fix": "warn"
   },
   "root": false,
-  "ignorePatterns": ["dist"]
+  "ignorePatterns": ["dist", "tailwind.config.cjs", "postcss.config.cjs"]
 }
