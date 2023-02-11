@@ -1,0 +1,23 @@
+name: Frontend Deployment
+on:
+  push:
+    paths:
+      - "services/frontend"
+jobs:
+  build:
+    name: Build the frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install packages
+        run: yarn
+      - name: Typescript check
+        run: yarn tsc
+      - name: Lint check
+        run: yarn lint
+      - name: Build
+        run: yarn build
