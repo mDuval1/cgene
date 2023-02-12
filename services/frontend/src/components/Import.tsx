@@ -6,27 +6,31 @@ import useDataStore from '../stores/dataStore';
 export default function Import() {
   const { addFile } = useDataStore();
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    for (const file of acceptedFiles) {
-      file
-        .text()
-        .then((text) => {
-          const textLines = text.split('\n');
-          if (textLines.length === 0) return;
-          const header = textLines[0];
-          const content = textLines.slice(1).join('');
-          addFile({
-            fileName: file.name,
-            header,
-            sequence: content,
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      for (const file of acceptedFiles) {
+        file
+          .text()
+          .then((text) => {
+            const textLines = text.split('\n');
+            if (textLines.length === 0) return;
+            const header = textLines[0];
+            const content = textLines.slice(1).join('');
+            addFile({
+              fileName: file.name,
+              header,
+              sequence: content,
+            });
+          })
+          .catch(() => {
+            // eslint-disable-next-line no-console
+            console.error('Problem processing text');
           });
-        })
-        .catch(() => {
-          console.error('Problem processing text');
-        });
-    }
-    // Do something with the files
-  }, []);
+      }
+      // Do something with the files
+    },
+    [addFile],
+  );
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
