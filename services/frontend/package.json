@@ -3,11 +3,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-split-pane": "^0.1.92",
     "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/react-split-pane": "^0.1.67",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.51.0",
     "@vitejs/plugin-react": "^3.1.0",
