@@ -4,7 +4,7 @@ import Pane, { type SplitPaneProps } from 'react-split-pane';
 
 import Data from './components/Data';
 import Import from './components/Import';
-import SequenceView from './components/SequenceViewer';
+import SequenceView from './components/SequenceViewer/SequenceViewer';
 
 function SplitPane({ children, ...props }: React.PropsWithChildren<SplitPaneProps>) {
   return <Pane {...props}>{children}</Pane>;
@@ -32,10 +32,10 @@ function App() {
                 <Data />
               </div>
               <div id="file-details">
-                <div className="flex flex-col place-content-end bg-cyan-50">
+                <div className="bg-white-100 flex flex-col place-content-end">
                   <p className="text-2xl font-bold">Sequence section</p>
                   <div>Toto</div>
-                  <SequenceView sequence="GAACAAATGTGTAATTACACGAACGCAACCCAGCTAGTCTGGCCTGCCCAACGTGGGAGGTGAAAGGAGCTTGCGACTGGCATGACGCTAGTCAGTCGCTGTTCCCTGGTCGAGTGCGTCCGTAAGTTCGTGGGTTTCTACTTGATCTCCGCCTGCTTTACCGATGCTTAGCTAGTAGGGTTCTTATATCGCGGAGACGCTGTCGCTGTGTCACCAGTAAACTAGCGGGTGCTAGTACGGAAGTCAATGGGGTGTATTTTCCCCGACGGCCTCGGGGTGGTACTGCTAGCGTCATCGTGATGCTGTTGCTCTGTAGTGCGAGCGCCCTGGGCCGGTAGAGAGCTCCCCCTGCTTTGTCGGCTAGTCTATCTATTGTCTCGTTCAAAGTGGTCGGGATTTCGTCAGTCCCATGGTTCAGTATAACAATAGCTCCAGGGCTAAATATCACCCCTTCACGTTCCATGGTGTTCCATGAAGTACGTCGTTGAGAGTGTGTCCCA" />
+                  <SequenceView sequence="AAATTTCGAGTAAACGGAAGCGGCAAAATCACACTCATTAGACGGCCATATTTGTTTAAAGCTACCCAAATAAATCCCCTTTGTGGCGCCCGGTCAGGAGACAGACCCTTATCAGAGCGTTAGAACCCACCAACGTTTGTGAGCGGTCACTCGACAGTGGTATAACCCGATCCAACAACACCGTGAGGATTCATATCATG" />
                 </div>
               </div>
             </SplitPane>
