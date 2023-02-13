@@ -1,8 +1,7 @@
-import { Axis, Orientation } from '@visx/axis';
-import { scaleLinear } from '@visx/scale';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import chunkLeft from './helpers';
+import SelectionBottomBar from './SelectionBottomBar';
 import SequenceRow from './SequenceRow';
 
 interface SequenceViewProps {
@@ -43,32 +42,21 @@ function SequenceView(props: SequenceViewProps) {
   );
 
   return (
-    <div className="flex flex-col divide-y-2 p-4" ref={containerRef}>
-      {sequenceRows.map((sequenceRow, index) => {
-        const characterIndexStart = charactersPerRow * index + 1;
-        const characterIndexEnd = characterIndexStart + charactersPerRow;
-        const scale = scaleLinear({
-          domain: [characterIndexStart - 0.5, characterIndexEnd - 0.5], // x-coordinate data values
-          range: [0, containerWidth], // svg x-coordinates, svg x-coordinates increase left to right
-          round: true,
-        });
-        return (
-          <div className="flex flex-col" key={sequenceRow}>
-            <SequenceRow sequenceRow={sequenceRow} />
-            <svg className="mb-4 h-5">
-              <g>
-                <Axis
-                  orientation={Orientation.bottom}
-                  scale={scale}
-                  numTicks={8}
-                  labelProps={{ x: 20 }}
-                  hideAxisLine
-                />
-              </g>
-            </svg>
-          </div>
-        );
-      })}
+    <div>
+      <div className="flex flex-col divide-y-2 p-4" ref={containerRef}>
+        {sequenceRows.map((sequenceRow, index) => (
+          <SequenceRow
+            key={sequenceRow}
+            sequenceRow={sequenceRow}
+            charactersPerRow={charactersPerRow}
+            containerWidth={containerWidth}
+            index={index}
+          />
+        ))}
+      </div>
+      <div className="sticky bottom-0 h-8 w-full bg-slate-200">
+        <SelectionBottomBar />
+      </div>
     </div>
   );
 }
