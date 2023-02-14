@@ -10,25 +10,19 @@ import SelectionRow from './components/SelectionRow';
 
 interface SequenceViewerRowProps {
   charactersPerRow: number;
-  containerWidth: number;
   index: number;
   sequenceRow: string;
 }
 
 const isRightClickInteraction = (e: React.MouseEvent<HTMLDivElement>) => e.button === 2;
 
-function SequenceViewerRow({
-  sequenceRow,
-  containerWidth,
-  charactersPerRow,
-  index,
-}: SequenceViewerRowProps) {
+function SequenceViewerRow({ sequenceRow, charactersPerRow, index }: SequenceViewerRowProps) {
   const characterIndexStart = charactersPerRow * index + 1;
   const characterMaxPossibleIndex = characterIndexStart + charactersPerRow;
   const characterIndexEnd = characterIndexStart + sequenceRow.length;
   const scale = scaleLinear({
-    domain: [characterIndexStart - 0.5, characterMaxPossibleIndex - 0.5], // x-coordinate data values
-    range: [0, containerWidth], // svg x-coordinates, svg x-coordinates increase left to right
+    domain: [characterIndexStart - 0.5, characterIndexEnd - 0.5], // x-coordinate data values
+    range: [0, sequenceRow.length * CHARACTER_SIZE], // svg x-coordinates, svg x-coordinates increase left to right
     round: true,
   });
 
@@ -102,7 +96,7 @@ function SequenceViewerRow({
           <Axis
             orientation={Orientation.bottom}
             scale={scale}
-            numTicks={8}
+            numTicks={sequenceRow.length / 10}
             labelProps={{ x: 20 }}
             hideAxisLine
           />

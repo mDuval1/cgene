@@ -69,7 +69,6 @@ function SequenceView(props: SequenceViewProps) {
             key={sequenceRow}
             sequenceRow={sequenceRow}
             charactersPerRow={charactersPerRow}
-            containerWidth={containerWidth}
             index={index}
           />
         ))}
