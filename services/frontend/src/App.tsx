@@ -33,7 +33,7 @@ function App() {
               </div>
               <div id="file-details">
                 <div className="bg-white-100 flex flex-col place-content-end">
-                  <p className="text-2xl font-bold">Sequence section</p>
+                  <p className="text-2xl font-bold">Sequence view</p>
                   <div>Toto</div>
                   <SequenceView sequence="AAATTTCGAGTAAACGGAAGCGGCAAAATCACACTCATTAGACGGCCATATTTGTTTAAAGCTACCCAAATAAATCCCCTTTGTGGCGCCCGGTCAGGAGACAGACCCTTATCAGAGCGTTAGAACCCACCAACGTTTGTGAGCGGTCACTCGACAGTGGTATAACCCGATCCAACAACACCGTGAGGATTCATATCATG" />
                 </div>

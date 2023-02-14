@@ -1,7 +1,9 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
+import useSelectionStore from '../../stores/selectionStore';
 import chunkLeft from '../helpers';
 import SelectionBottomBar from './SelectionBottomBar';
+import SelectionPopper from './SelectionPopper';
 import SequenceViewerRow from './SequenceViewerRow/SequenceViewerRow';
 
 interface SequenceViewProps {
@@ -12,7 +14,25 @@ export const CHARACTER_SIZE = 11.2016;
 function SequenceView(props: SequenceViewProps) {
   const { sequence } = props;
 
+  const { rightClickReference, setRightClickReference, setSelectionStart, setSelectionEnd } =
+    useSelectionStore();
   const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    const handleKeyboardShortcut = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setRightClickReference(null);
+        setSelectionStart(null);
+        setSelectionEnd(null);
+      }
+    };
+    document.addEventListener('keydown', handleKeyboardShortcut);
+    return () => {
+      document.removeEventListener('keydown', handleKeyboardShortcut);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const charactersPerRow = containerWidth === 0 ? 10 : Math.floor(containerWidth / CHARACTER_SIZE);
 
@@ -57,6 +77,7 @@ function SequenceView(props: SequenceViewProps) {
       <div className="sticky bottom-0 h-8 w-full bg-slate-200">
         <SelectionBottomBar />
       </div>
+      {rightClickReference && <SelectionPopper referenceElement={rightClickReference} />}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
-import { useGetSelection } from '../../../../stores/selectionStore';
+import useSelectionStore, { useGetSelection } from '../../../../stores/selectionStore';
+import { POPPER_HEIGHT, POPPER_WIDTH } from '../../SelectionPopper';
 
 interface SelectionRowProps {
   characterIndexEnd: number;
@@ -14,6 +15,7 @@ function SelectionRow({
   characterIndexEnd,
 }: SelectionRowProps) {
   const { start, end, isValid: isSelectionValid } = useGetSelection();
+  const { setRightClickReference } = useSelectionStore();
 
   const selectionZone = useMemo(() => {
     if (start == null || start > characterIndexEnd) return null;
@@ -53,12 +55,32 @@ function SelectionRow({
     () => maskZones.map(getStyleForZone),
     [getStyleForZone, maskZones],
   );
+
   return (
     <>
       {isSelectionValid && pixelPositionsSelectionZone && (
         <div
-          className="absolute h-full w-full rounded border-2 border-solid border-black bg-blue-700 opacity-60"
+          className="absolute z-10 h-6 w-full cursor-pointer rounded border-2 border-solid border-black bg-blue-700 opacity-60"
           style={{ ...pixelPositionsSelectionZone }}
+          onContextMenu={(e) => {
+            const virtualReference = {
+              getBoundingClientRect() {
+                return {
+                  bottom: e.clientY + POPPER_HEIGHT,
+                  height: POPPER_HEIGHT,
+                  left: e.clientX,
+                  right: e.clientX + POPPER_WIDTH,
+                  toJSON: () => {},
+                  top: e.clientY,
+                  width: POPPER_WIDTH,
+                  x: e.clientX,
+                  y: e.clientY,
+                };
+              },
+            };
+            setRightClickReference(virtualReference);
+            e.preventDefault();
+          }}
         />
       )}
       {isSelectionValid &&

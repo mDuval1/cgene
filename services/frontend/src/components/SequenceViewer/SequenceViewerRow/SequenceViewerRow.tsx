@@ -15,6 +15,8 @@ interface SequenceViewerRowProps {
   sequenceRow: string;
 }
 
+const isRightClickInteraction = (e: React.MouseEvent<HTMLDivElement>) => e.button === 2;
+
 function SequenceViewerRow({
   sequenceRow,
   containerWidth,
@@ -50,10 +52,18 @@ function SequenceViewerRow({
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isRightClickInteraction(e)) {
+      e.preventDefault();
+      return;
+    }
     setSelectionStart(getCursorPositionFromEvent(e));
   };
 
   const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isRightClickInteraction(e)) {
+      e.preventDefault();
+      return;
+    }
     setSelectionEnd(getCursorPositionFromEvent(e));
   };
 
