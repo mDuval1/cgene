@@ -24,20 +24,14 @@ function App() {
               split="horizontal"
               size={200}
               maxSize={500}
-              pane2Style={{ overflow: 'scroll' }}
+              pane2Style={{ overflow: 'auto' }}
             >
               <div className="flex flex-col place-items-center" id="list-files">
                 <p className="text-2xl font-bold">Upload fasta file</p>
                 <Import />
                 <Data />
               </div>
-              <div id="file-details">
-                <div className="bg-white-100 flex flex-col place-content-end">
-                  <p className="text-2xl font-bold">Sequence view</p>
-                  <div>Toto</div>
-                  <SequenceView sequence="AAATTTCGAGTAAACGGAAGCGGCAAAATCACACTCATTAGACGGCCATATTTGTTTAAAGCTACCCAAATAAATCCCCTTTGTGGCGCCCGGTCAGGAGACAGACCCTTATCAGAGCGTTAGAACCCACCAACGTTTGTGAGCGGTCACTCGACAGTGGTATAACCCGATCCAACAACACCGTGAGGATTCATATCATG" />
-                </div>
-              </div>
+              <SequenceView sequence="TCCTGTTACGGCGAGCCCGTATTCATTAAAGTAACAAGGAATGATGCATACCATGCTTCGCGTAACCACCGACCGAGTGTAATAGCTGATGATAATAACATAGACTGCTAATGGGAACCGGCGTATTCCTAGCGCAGCAGGTCATCGGTCTGAGGCACACTTAGTAACACCCATTTTCCCCTTCATTGCTGAGATGACGGTGGCTCGCAGTCGGTGAGTGTACAACTGTACCCGCATTTTCGTTGCGATCGACCTGCATCAAAATGTTTGACTCTGGCAGCTACGATCTAATACAGTCAA" />
             </SplitPane>
           </SplitPane>
         </div>

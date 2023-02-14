@@ -62,21 +62,24 @@ function SequenceView(props: SequenceViewProps) {
   );
 
   return (
-    <div>
-      <div className="flex flex-col divide-y-2 p-4" ref={containerRef}>
-        {sequenceRows.map((sequenceRow, index) => (
-          <SequenceViewerRow
-            key={sequenceRow}
-            sequenceRow={sequenceRow}
-            charactersPerRow={charactersPerRow}
-            index={index}
-          />
-        ))}
+    <div id="file-details" className="h-full">
+      <p className="top-0 flex h-12 w-full bg-slate-200 p-2 text-xl font-bold">Sequence view</p>
+      <div className="bg-white-100  flex-1 overflow-scroll">
+        <div className="flex flex-col divide-y-2 p-4" ref={containerRef}>
+          {sequenceRows.map((sequenceRow, index) => (
+            <SequenceViewerRow
+              key={sequenceRow}
+              sequenceRow={sequenceRow}
+              charactersPerRow={charactersPerRow}
+              index={index}
+            />
+          ))}
+        </div>
+        {rightClickReference && <SelectionPopper referenceElement={rightClickReference} />}
       </div>
       <div className="sticky bottom-0 h-8 w-full bg-slate-200">
         <SelectionBottomBar />
       </div>
-      {rightClickReference && <SelectionPopper referenceElement={rightClickReference} />}
     </div>
   );
 }
