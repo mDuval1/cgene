@@ -1,24 +1,26 @@
+import produce from 'immer';
 import { create } from 'zustand';
 
-interface DataStoreFile {
-  fileName: string;
-  header: string;
-  sequence: string;
-}
+import { type DataStoreFile } from '../services/files/types';
 
 interface DataStore {
   addFile: (file: DataStoreFile) => void;
   files: DataStoreFile[];
+  removeFile: (id: string) => void;
 }
 
 const useDataStore = create<DataStore>((set) => ({
   addFile: (file) => {
-    set(({ files }) => {
-      files.push(file);
-      return { files };
-    });
+    set(
+      produce((state) => {
+        state.files.push(file);
+      }),
+    );
   },
   files: [],
+  removeFile: (id) => {
+    set(({ files }) => ({ files: files.filter((f) => f.id !== id) }));
+  },
 }));
 
 export default useDataStore;

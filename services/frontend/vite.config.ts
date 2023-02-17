@@ -9,6 +9,9 @@ export default defineConfig({
       typescript: true,
       eslint: {
         lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
+        dev: {
+          logLevel: ['error'],
+        },
       },
     }),
   ],

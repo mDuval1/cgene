@@ -1,20 +1,27 @@
 {
   "dependencies": {
     "@popperjs/core": "^2.11.6",
+    "@tanstack/react-table": "^8.7.9",
     "@visx/axis": "^3.0.0",
     "@visx/scale": "^3.0.0",
     "d3-scale": "^4.0.2",
+    "flowbite": "^1.6.3",
+    "flowbite-react": "^0.3.8",
+    "immer": "^9.0.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-icons": "^4.7.1",
     "react-popper": "^2.3.0",
     "react-split-pane": "^0.1.92",
+    "uuid": "^9.0.0",
     "zustand": "^4.3.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-split-pane": "^0.1.67",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.51.0",
     "@vitejs/plugin-react": "^3.1.0",

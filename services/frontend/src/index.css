@@ -51,3 +51,13 @@
 .Resizer.disabled:hover {
   border-color: transparent;
 }
+
+table,
+tr {
+  border: 1px solid;
+}
+
+td {
+  padding: 4px;
+  font-size: 14px;
+}

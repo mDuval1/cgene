@@ -1,10 +1,11 @@
 import './index.css';
 
+import React, { Suspense } from 'react';
 import Pane, { type SplitPaneProps } from 'react-split-pane';
 
-import Data from './components/Data';
-import Import from './components/Import';
-import SequenceView from './components/SequenceViewer/SequenceViewer';
+const Files = React.lazy(async () => await import('./components/Layout/Files/Files'));
+const FileViewer = React.lazy(async () => await import('./components/Layout/FileViewer'));
+const TopBar = React.lazy(async () => await import('./components/Layout/TopBar/TopBar'));
 
 function SplitPane({ children, ...props }: React.PropsWithChildren<SplitPaneProps>) {
   return <Pane {...props}>{children}</Pane>;
@@ -14,24 +15,24 @@ function App() {
   return (
     <div className="relative h-screen">
       <SplitPane split="horizontal" minSize={48} maxSize={48} size={48}>
-        <div className="flex w-full flex-col place-items-center bg-cyan-600" id="topbar">
-          Top bar
-        </div>
+        <Suspense fallback={null}>
+          <TopBar />
+        </Suspense>
         <div className="flex flex-col place-items-center " id="topbar">
-          <SplitPane split="vertical" minSize={50} maxSize={400} size={100}>
+          <SplitPane split="vertical" minSize={50} maxSize={400} size={150}>
             <div>Sidebar for files</div>
             <SplitPane
               split="horizontal"
-              size={200}
+              size={400}
               maxSize={500}
               pane2Style={{ overflow: 'auto' }}
             >
-              <div className="flex flex-col place-items-center" id="list-files">
-                <p className="text-2xl font-bold">Upload fasta file</p>
-                <Import />
-                <Data />
-              </div>
-              <SequenceView sequence="TCCTGTTACGGCGAGCCCGTATTCATTAAAGTAACAAGGAATGATGCATACCATGCTTCGCGTAACCACCGACCGAGTGTAATAGCTGATGATAATAACATAGACTGCTAATGGGAACCGGCGTATTCCTAGCGCAGCAGGTCATCGGTCTGAGGCACACTTAGTAACACCCATTTTCCCCTTCATTGCTGAGATGACGGTGGCTCGCAGTCGGTGAGTGTACAACTGTACCCGCATTTTCGTTGCGATCGACCTGCATCAAAATGTTTGACTCTGGCAGCTACGATCTAATACAGTCAA" />
+              <Suspense fallback={null}>
+                <Files />
+              </Suspense>
+              <Suspense fallback={null}>
+                <FileViewer />
+              </Suspense>
             </SplitPane>
           </SplitPane>
         </div>
