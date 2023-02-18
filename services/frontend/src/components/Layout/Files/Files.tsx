@@ -94,8 +94,8 @@ function FilesTable() {
         <tbody>
           {table.getRowModel().rows.map((row) => {
             const isRowSelected = row.original.id === selectedFileId;
-            const backgroundColor = isRowSelected ? 'bg-slate-300' : 'white';
-            const hoverColorClass = isRowSelected ? '' : 'hover:bg-slate-200';
+            const backgroundColor = isRowSelected ? 'bg-slate-200' : 'white';
+            const hoverColorClass = isRowSelected ? '' : 'hover:bg-slate-100';
             return (
               <tr
                 key={row.id}
