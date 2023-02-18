@@ -52,7 +52,17 @@
     "jsx-a11y/no-static-element-interactions": "off",
     "n/no-callback-literal": "off",
     "no-return-await": "off",
-    "@typescript-eslint/return-await": "warn"
+    "@typescript-eslint/return-await": "warn",
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        "checksVoidReturn": {
+          "attributes": false
+        }
+      }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "warn"
   },
   "root": false,
   "ignorePatterns": ["dist", "tailwind.config.cjs", "postcss.config.cjs"]
