@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { auth } from '../../main';
+import { auth } from '../../firebase';
 import ROUTES from '../../pages/routes';
 
 interface AuthContextType {

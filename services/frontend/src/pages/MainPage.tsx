@@ -1,6 +1,6 @@
 import '../index.css';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import Pane, { type SplitPaneProps } from 'react-split-pane';
 
 import Files from '../components/Layout/Files/Files';
@@ -15,9 +15,7 @@ function MainPage() {
   return (
     <div className="relative h-screen">
       <SplitPane split="horizontal" minSize={48} maxSize={48} size={48}>
-        <Suspense fallback={null}>
-          <TopBar />
-        </Suspense>
+        <TopBar />
         <div className="flex flex-col place-items-center " id="topbar">
           <SplitPane split="vertical" minSize={50} maxSize={400} size={150}>
             <div>Sidebar for files</div>
@@ -27,12 +25,8 @@ function MainPage() {
               maxSize={500}
               pane2Style={{ overflow: 'auto' }}
             >
-              <Suspense fallback={null}>
-                <Files />
-              </Suspense>
-              <Suspense fallback={null}>
-                <FileViewer />
-              </Suspense>
+              <Files />
+              <FileViewer />
             </SplitPane>
           </SplitPane>
         </div>

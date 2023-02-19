@@ -11,6 +11,7 @@ function UploadFile() {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       for (const file of acceptedFiles) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         uploadFile(file);
       }
     },

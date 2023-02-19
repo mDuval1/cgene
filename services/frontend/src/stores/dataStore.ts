@@ -7,6 +7,7 @@ interface DataStore {
   addFile: (file: DataStoreFile) => void;
   files: DataStoreFile[];
   removeFile: (id: string) => void;
+  setFiles: (files: DataStoreFile[]) => void;
 }
 
 const useDataStore = create<DataStore>((set) => ({
@@ -20,6 +21,9 @@ const useDataStore = create<DataStore>((set) => ({
   files: [],
   removeFile: (id) => {
     set(({ files }) => ({ files: files.filter((f) => f.id !== id) }));
+  },
+  setFiles: (files) => {
+    set({ files });
   },
 }));
 

@@ -12,5 +12,8 @@
         "source": "**"
       }
     ]
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }

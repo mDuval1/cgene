@@ -1,4 +1,3 @@
-// maximeduvalsy@gmail.com
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';

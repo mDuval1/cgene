@@ -6,24 +6,32 @@ import {
   type Row,
   useReactTable,
 } from '@tanstack/react-table';
-import { RiDeleteBin5Line } from 'react-icons/ri';
+import { remove } from 'firebase/database';
+import { Button, Tooltip } from 'flowbite-react';
+import { RiDeleteBin5Line, RiRefreshFill } from 'react-icons/ri';
 
+import { useFileRef, useFiles } from '../../../services/api/files';
 import { type DataStoreFile } from '../../../services/files/types';
 import useDataStore from '../../../stores/dataStore';
 import useFileSelectionStore from '../../../stores/fileSelectionStore';
-import Button from '../../Atomic/Button';
 
 const columnHelper = createColumnHelper<DataStoreFile>();
 
 function DeleteCell({ info }: { info: CellContext<DataStoreFile, DataStoreFile> }) {
   const { removeFile } = useDataStore();
+  const {
+    row: {
+      original: { id },
+    },
+  } = info;
+
+  const fileRef = useFileRef(id);
   const handleDeleteClick = () => {
-    const {
-      row: {
-        original: { id },
-      },
-    } = info;
-    removeFile(id);
+    if (fileRef) {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      remove(fileRef);
+      removeFile(id);
+    }
   };
 
   return (
@@ -60,6 +68,7 @@ const columns = [
 
 function FilesTable() {
   const { files } = useDataStore();
+  const { fetch: refetchFiles } = useFiles();
   const { selectFile, selectedFileId } = useFileSelectionStore();
 
   const table = useReactTable({
@@ -77,6 +86,18 @@ function FilesTable() {
 
   return (
     <div>
+      <div className="mb-4 flex flex-row items-center justify-between px-2">
+        <p className="text-2xl font-bold">Local files</p>
+        <Tooltip content="Refresh">
+          <Button
+            onClick={() => {
+              refetchFiles();
+            }}
+          >
+            <RiRefreshFill size={20} />
+          </Button>
+        </Tooltip>
+      </div>
       <table className="w-full table-auto">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -119,7 +140,6 @@ function FilesTable() {
 function Files() {
   return (
     <div className="place-items-left flex w-full flex-col overflow-auto p-4" id="list-files">
-      <p className="text-2xl font-bold">Local files</p>
       <FilesTable />
     </div>
   );
